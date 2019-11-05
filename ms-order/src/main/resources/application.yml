@@ -1,0 +1,35 @@
+server:
+  port: 8060
+spring:
+  application:
+    name: ms-order
+  #Database config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.8.245:3306/crady?useSSL=false
+    username: root
+    password: a123321
+eureka:
+  instance:
+    hostname: ms-order
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:sqlmapper/*.xml
+  configuration:
+    #懒加载
+    aggressive-lazy-loading: true
+    #执行器类型
+    default-executor-type: simple
+#分布式事务管理器地址
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070
+logging:
+  level:
+    com.crady.mapper: debug
